@@ -20,8 +20,11 @@ class ApplicationController < Sinatra::Base
     @user = User.new(name: params["name"], email: params["email"], password: params["password"])
     @user.save
     session[:user_id] = @user.id
+    puts "heywhereisparams post #{params.inspect}"
 
     redirect '/users/home'
+    # puts "heywhereisparams #{params.inspect}"
+
   end
 
   get '/sessions/login' do
@@ -47,6 +50,9 @@ class ApplicationController < Sinatra::Base
   get '/users/home' do
 
     @user = User.find(session[:user_id])
+    # puts "heywhereisparams get #{params.inspect}"
     erb :'/users/home'
+    # puts params.inspect
+    
   end
 end
